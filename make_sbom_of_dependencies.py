@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import tomllib
+
+def load_reverse_table(filename: str = "cache/reverse_table.json") -> dict:
+    """
+    Load the reverse table from a JSON file.
+    :param filename: The name of the JSON file to load.
+    :return: The loaded hash table as a dictionary.
+    """
+    try:
+        with open(filename, "r") as f:
+            hash_table = json.load(f)
+        return hash_table
+    except FileNotFoundError:
+        print(f"File {filename} not found.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON from file {filename}.")
+        return {}
+
+def load_package_db(filename: str = "packages.toml") -> dict:
+    """
+    Load the package database from a TOML file.
+    :param filename: The name of the TOML file to load.
+    :return: The loaded package database as a dictionary.
+    """
+    try:
+        with open(filename, "rb") as f:
+            package_db = tomllib.load(f)
+        return package_db
+    except FileNotFoundError:
+        print(f"File {filename} not found.")
+        return {}
+    except tomllib.TOMLDecodeError:
+        print(f"Error decoding TOML from file {filename}.")
+        return {}
+
+def create_package_db_index(package_db: dict) -> dict:
+    """
+    Create an index of the package database for quick lookup.
+    :param package_db: The package database as a dictionary.
+    :return: An index of the package database.
+    """
+    package_db_index = {}
+    for package in package_db["packages"]:
+        package_db_index[package["sha256sum"]] = package
+    
+    return package_db_index
+
+def is_bazel_central_registry(urls: set):
+    for url in urls:
+        if url.startswith("https://bcr.bazel.build/"):
+            return True
+    return False
+
+def main():
+    reverse_table = load_reverse_table()
+    if not reverse_table:
+        print("No hash table loaded.")
+        exit(1)
+    package_db = load_package_db()
+    if not package_db:
+        print("No package database loaded.")
+        exit(1)
+    package_db_index = create_package_db_index(package_db)
+
+    root_dir = "dependencies/content_addressable/sha256"
+
+    bazel_central_registry = {
+        "name": "bazel-central-registry",
+        "purl": "pkg:github/bazelbuild/bazel-central-registry",
+        "license": "Apache-2.0",
+        "files": []
+    }
+
+    sbom = {
+        "packages": [
+            bazel_central_registry
+        ]
+    }
+
+    for hash in os.listdir(root_dir):
+        if hash in reverse_table:
+            entry = reverse_table[hash]
+            urls = {e["url"] for e in entry if "url" in e}
+            if is_bazel_central_registry(urls):
+                bazel_central_registry["files"].append({
+                    "path": f"content_addressable/sha256/{hash}",
+                    "downloadLocations": list(urls)
+                })
+            elif hash in package_db_index:
+                p = package_db_index[hash]
+                package = {
+                    "name": p["name"],
+                    "license": p["license"],
+                    "files": [{
+                        "path": f"content_addressable/sha256/{hash}",
+                        "downloadLocations": list(urls)
+                    }]
+                }
+                sbom["packages"].append(package)
+            else:
+                package = {
+                    "name": "noassertion",
+                    "license": "noassertion",
+                    "files": [{
+                        "path": f"content_addressable/sha256/{hash}",
+                        "downloadLocations": list(urls)
+                    }]
+                }
+                sbom["packages"].append(package)
+        else:
+            package = {
+                "name": "noassertion",
+                "license": "noassertion",
+                "files": [{
+                    "path": f"content_addressable/sha256/{hash}",
+                }]
+            }
+            sbom["packages"].append(package)
+    
+    with open("dependencies/sbom.json", "w") as f:
+        json.dump(sbom, f, indent=4)
+
+if __name__ == "__main__":
+    main()

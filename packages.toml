@@ -1,0 +1,4 @@
+[[packages]]
+name = "bazelbuild/rules_android_ndk"
+sha256sum = "89bf5012567a5bade4c78eac5ac56c336695c3bfd281a9b0894ff6605328d2d5"
+license = "Apache-2.0"

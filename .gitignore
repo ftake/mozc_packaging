@@ -1,0 +1,15 @@
+#
+# project specific directories
+#
+/dependencies
+/deps
+/cache
+
+#
+# common files and directories
+#
+.vscode/
+.DS_Store
+Thumbs.db
+*.orig
+*~
