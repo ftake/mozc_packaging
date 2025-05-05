@@ -50,14 +50,17 @@ def create_package_db_index(package_db: dict) -> dict:
     
     return package_db_index
 
-def is_bazel_central_registry(urls: set):
+def is_bazel_central_registry(urls: list):
     for url in urls:
         if url.startswith("https://bcr.bazel.build/"):
             return True
     return False
 
+
 def main():
     reverse_table = load_reverse_table()
+    unknown_packages = []
+
     if not reverse_table:
         print("No hash table loaded.")
         exit(1)
@@ -85,11 +88,12 @@ def main():
     for hash in os.listdir(root_dir):
         if hash in reverse_table:
             entry = reverse_table[hash]
-            urls = {e["url"] for e in entry if "url" in e}
+            urls = sorted(list({e["url"] for e in entry if "url" in e}))
+
             if is_bazel_central_registry(urls):
                 bazel_central_registry["files"].append({
                     "path": f"content_addressable/sha256/{hash}",
-                    "downloadLocations": list(urls)
+                    "downloadLocations": urls
                 })
             elif hash in package_db_index:
                 p = package_db_index[hash]
@@ -98,20 +102,28 @@ def main():
                     "license": p["license"],
                     "files": [{
                         "path": f"content_addressable/sha256/{hash}",
-                        "downloadLocations": list(urls)
+                        "downloadLocations": urls
                     }]
                 }
                 sbom["packages"].append(package)
             else:
+                # No data in the package database but found in Bazel Central Registry
                 package = {
                     "name": "noassertion",
                     "license": "noassertion",
                     "files": [{
                         "path": f"content_addressable/sha256/{hash}",
-                        "downloadLocations": list(urls)
+                        "downloadLocations": urls
                     }]
                 }
                 sbom["packages"].append(package)
+                packagename_candidate = urls[-1].split("/")[-1] if urls else urls[-1]
+                unknown_packages.append({
+                    "name": packagename_candidate,
+                    "sha256sum": hash,
+                    "urls": urls
+                })
+
         else:
             package = {
                 "name": "noassertion",
@@ -124,6 +136,22 @@ def main():
     
     with open("dependencies/sbom.json", "w") as f:
         json.dump(sbom, f, indent=4)
+
+    if unknown_packages:
+        print("=== Unknown packages ===")
+        for package in unknown_packages:
+            print()
+            print("[[packages]]")
+            urls = package["urls"]
+            for url in urls:
+                print(f"# {url}")
+            print(f'name = "{package['name']}"')
+            print(f'sha256sum = "{package["sha256sum"]}"')
+            if len(urls) == 1:
+                print(f"downloadLocation = \"{urls[0]}\"")
+            print(f'license = ""')
+            print('version = ""')
+
 
 if __name__ == "__main__":
     main()
