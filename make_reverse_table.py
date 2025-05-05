@@ -18,8 +18,20 @@ def add_to_reverse_table(key: str, obj: dict):
     reverse_table[key] = table_entry
 
 
+def add_file_to_reverse_table(file_path: str):
+    print(f"File: {file_path}", file=sys.stderr)
+    with open(file_path, "rb") as f:
+        # calculate sha256 hash of the file
+        content = f.read()
+        file_hash = hashlib.sha256(content).hexdigest()
+        add_to_reverse_table(file_hash, {"url": os.path.join("https://bcr.bazel.build/", file_path)})
+        return content
+
+
 def main():
     os.chdir("bazel-central-registry")
+
+    add_file_to_reverse_table("bazel_registry.json")
 
     # for each file in modules
     modules_dir = "modules"
@@ -27,32 +39,27 @@ def main():
         for file in files:
             # get sha256 hash of the file
             file_path = os.path.join(root, file)
-            print(f"File: {file_path}", file=sys.stderr)
-            with open(file_path, "rb") as f:
-                # calculate sha256 hash of the file
-                content = f.read()
-                file_hash = hashlib.sha256(content).hexdigest()
-                add_to_reverse_table(file_hash, {"url": os.path.join("https://bcr.bazel.build/", file_path)})
+            content = add_file_to_reverse_table(file_path)
 
-                if (file == "source.json"):
-                    # parse the content as json
-                    source = json.loads(content.decode("utf-8"))
+            if (file == "source.json"):
+                # parse the content as json
+                source = json.loads(content.decode("utf-8"))
 
-                    # add hash value of source file
-                    url = source.get("url")
-                    if url is None:
-                        continue
-                        
-                    integrity = source["integrity"]
+                # add hash value of source file
+                url = source.get("url")
+                if url is None:
+                    continue
+                    
+                integrity = source["integrity"]
 
-                    algorithm = integrity.split("-")[0]
-                    base64_hash = integrity.split("-")[1]
-                    decoded_hash = base64.b64decode(base64_hash)
-                    hex_string = decoded_hash.hex()
-                    add_to_reverse_table(hex_string, {"url": url, "source.json": file_path, "algorithm": algorithm})
+                algorithm = integrity.split("-")[0]
+                base64_hash = integrity.split("-")[1]
+                decoded_hash = base64.b64decode(base64_hash)
+                hex_string = decoded_hash.hex()
+                add_to_reverse_table(hex_string, {"url": url, "source.json": file_path, "algorithm": algorithm})
 
 
-    with open("../reverse_table.json", "w") as f:
+    with open("../cache/reverse_table.json", "w") as f:
         json.dump(reverse_table, f, indent=4, sort_keys=True)
 
 
