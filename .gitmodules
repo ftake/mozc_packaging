@@ -1,0 +1,9 @@
+[submodule "mozc"]
+	path = mozc
+	url = https://github.com/google/mozc.git
+[submodule "bazel-central-registry"]
+	path = bazel-central-registry
+	url = https://github.com/bazelbuild/bazel-central-registry.git
+[submodule "fcitx-mozc"]
+	path = fcitx-mozc
+	url = https://github.com/fcitx/mozc.git
