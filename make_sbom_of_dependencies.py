@@ -62,12 +62,16 @@ def main():
     unknown_packages = []
 
     if not reverse_table:
-        print("No hash table loaded.")
+        print("Error: No hash table loaded.")
         exit(1)
     package_db = load_package_db()
     if not package_db:
-        print("No package database loaded.")
-        exit(1)
+        print("Warning: No package database loaded.")
+        # continue with empty package_db
+        package_db = {
+            "packages": []
+        }
+
     package_db_index = create_package_db_index(package_db)
 
     root_dir = "dependencies/content_addressable/sha256"
