@@ -90,7 +90,20 @@ def main():
     }
 
     for hash in os.listdir(root_dir):
-        if hash in reverse_table:
+        # in the package DB
+        if hash in package_db_index:
+            p = package_db_index[hash]
+            package = {
+                "name": p["name"],
+                "license": p["license"],
+                "files": [{
+                    "path": f"content_addressable/sha256/{hash}",
+                    "downloadLocations": urls
+                }]
+            }
+            sbom["packages"].append(package)
+
+        elif hash in reverse_table:
             entry = reverse_table[hash]
             urls = sorted(list({e["url"] for e in entry if "url" in e}))
 
@@ -99,17 +112,7 @@ def main():
                     "path": f"content_addressable/sha256/{hash}",
                     "downloadLocations": urls
                 })
-            elif hash in package_db_index:
-                p = package_db_index[hash]
-                package = {
-                    "name": p["name"],
-                    "license": p["license"],
-                    "files": [{
-                        "path": f"content_addressable/sha256/{hash}",
-                        "downloadLocations": urls
-                    }]
-                }
-                sbom["packages"].append(package)
+            
             else:
                 # No data in the package database but found in Bazel Central Registry
                 package = {
@@ -127,8 +130,8 @@ def main():
                     "sha256sum": hash,
                     "urls": urls
                 })
-
         else:
+            # maybe a file by http_file / http_archive
             package = {
                 "name": "noassertion",
                 "license": "noassertion",
@@ -137,6 +140,11 @@ def main():
                 }]
             }
             sbom["packages"].append(package)
+            unknown_packages.append({
+                "name": "",
+                "sha256sum": hash,
+                "urls": []
+            })
     
     with open("dependencies/sbom.json", "w") as f:
         json.dump(sbom, f, indent=4)
