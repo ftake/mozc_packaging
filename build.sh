@@ -3,7 +3,14 @@
 export CC=gcc-10
 export CXX=g++-10
 
-pushd mozc/src
+pushd mozc
+
+git clean -f
+git checkout .
+
+patch -p1 < ../patches/use-system-python-3.12.patch
+
+pushd src
 
 bazel8 build package \
     -c opt --config oss_linux \
@@ -13,4 +20,5 @@ bazel8 build package \
 #   --registry=file:$(realpath ../bazel-central-registry) \
 #   --ignore_dev_dependency
 
+popd
 popd
