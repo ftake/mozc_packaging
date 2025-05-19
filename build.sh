@@ -20,5 +20,7 @@ bazel8 build package \
 #   --registry=file:$(realpath ../bazel-central-registry) \
 #   --ignore_dev_dependency
 
+cp MODULE.bazel.lock ../../out/
+
 popd
 popd
