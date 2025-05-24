@@ -97,7 +97,7 @@ def main():
                 "name": p["name"],
                 "license": p["license"],
                 "files": [{
-                    "path": f"content_addressable/sha256/{hash}",
+                    "path": f"content_addressable/sha256/{hash}/file",
                     "downloadLocations": [p["downloadLocation"]]
                 }]
             }
@@ -109,7 +109,7 @@ def main():
 
             if is_bazel_central_registry(urls):
                 bazel_central_registry["files"].append({
-                    "path": f"content_addressable/sha256/{hash}",
+                    "path": f"content_addressable/sha256/{hash}/file",
                     "downloadLocations": urls
                 })
             
@@ -119,7 +119,7 @@ def main():
                     "name": "noassertion",
                     "license": "noassertion",
                     "files": [{
-                        "path": f"content_addressable/sha256/{hash}",
+                        "path": f"content_addressable/sha256/{hash}/file",
                         "downloadLocations": urls
                     }]
                 }
@@ -136,7 +136,7 @@ def main():
                 "name": "noassertion",
                 "license": "noassertion",
                 "files": [{
-                    "path": f"content_addressable/sha256/{hash}",
+                    "path": f"content_addressable/sha256/{hash}/file",
                 }]
             }
             sbom["packages"].append(package)
