@@ -5,7 +5,7 @@ export CXX=g++-10
 
 pushd mozc
 
-git clean -f
+git clean -df
 git checkout .
 
 patch -p1 < ../patches/use-system-python-3.12.patch
