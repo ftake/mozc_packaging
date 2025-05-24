@@ -98,7 +98,7 @@ def main():
                 "license": p["license"],
                 "files": [{
                     "path": f"content_addressable/sha256/{hash}",
-                    "downloadLocations": urls
+                    "downloadLocations": [p["downloadLocation"]]
                 }]
             }
             sbom["packages"].append(package)
