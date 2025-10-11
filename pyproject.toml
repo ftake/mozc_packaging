@@ -1,0 +1,10 @@
+[project]
+name = "mozc-packaging"
+version = "0.1.0"
+description = "A project for tools to package Mozc."
+authors = [
+    { name = "Fuminobu TAKEYAMA", email = "ftake@geeko.jp" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.13"
