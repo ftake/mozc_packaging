@@ -1,9 +1,12 @@
 [submodule "mozc"]
 	path = mozc
 	url = https://github.com/google/mozc.git
+	ignore = dirty
 [submodule "bazel-central-registry"]
 	path = bazel-central-registry
 	url = https://github.com/bazelbuild/bazel-central-registry.git
+	ignore = dirty
 [submodule "fcitx-mozc"]
 	path = fcitx-mozc
 	url = https://github.com/fcitx/mozc.git
+	ignore = dirty
