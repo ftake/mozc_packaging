@@ -1,14 +1,14 @@
 #!/bin/bash
 
-export CC=gcc-10
-export CXX=g++-10
+export CC=gcc-15
+export CXX=g++-15
 
 pushd mozc
 
 git clean -df
 git checkout .
 
-patch -p1 < ../patches/use-system-python-3.12.patch
+patch -p1 < ../patches/use-system-python.patch
 
 pushd src
 
