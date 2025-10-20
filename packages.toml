@@ -189,3 +189,114 @@ sha256sum = "296cfa57f2012c0226afbc64e9e8575fc36285d2fa31d725a176548cd173b3df"
 downloadLocation = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/6ece210081fb73d0ea4a5ea8e13ac9584d03fd76/ken_all.zip"
 license = "SUSE-Public-Domain"
 version = "2025-03-08"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_shell/releases/download/v0.3.0/rules_shell-v0.3.0.tar.gz
+name = "rules_shell-v0.3.0.tar.gz"
+sha256sum = "d8cd4a3a91fc1dc68d4c7d6b655f09def109f7186437e3f50a9b60ab436a0c53"
+downloadLocation = "https://github.com/bazelbuild/rules_shell/releases/download/v0.3.0/rules_shell-v0.3.0.tar.gz"
+license = "Apache-2.0"
+version = "0.3.0"
+
+[[packages]]
+# https://github.com/bazel-contrib/rules_python/releases/download/1.5.4/rules_python-1.5.4.tar.gz
+name = "rules_python-1.5.4.tar.gz"
+sha256sum = "13671d304cfe43350302213a60d93a5fc0b763b0a6de17397e3e239253b61b73"
+downloadLocation = "https://github.com/bazel-contrib/rules_python/releases/download/1.5.4/rules_python-1.5.4.tar.gz"
+license = "Apache-2.0"
+version = "1.5.4"
+
+[[packages]]
+# https://github.com/protocolbuffers/protobuf/releases/download/v32.0/protobuf-32.0.zip
+name = "protobuf-32.0.zip"
+sha256sum = "62b6b80ab91a5379c03533bd6d59b6932b4385f0b0dd5299990bbe5e2cc6c428"
+downloadLocation = "https://github.com/protocolbuffers/protobuf/releases/download/v32.0/protobuf-32.0.zip"
+# jsoncpp was licensed under MIT but is not bundled anymore.
+license = "BSD-3-Clause"
+version = "32.0"
+
+[[packages]]
+# https://github.com/bazelbuild/bazel-skylib/releases/download/1.8.1/bazel-skylib-1.8.1.tar.gz
+name = "bazel-skylib-1.8.1.tar.gz"
+sha256sum = "51b5105a760b353773f904d2bbc5e664d0987fbaf22265164de65d43e910d8ac"
+downloadLocation = "https://github.com/bazelbuild/bazel-skylib/releases/download/1.8.1/bazel-skylib-1.8.1.tar.gz"
+license = "Apache-2.0"
+version = "1.8.1"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_cc/releases/download/0.2.2/rules_cc-0.2.2.tar.gz
+name = "rules_cc-0.2.2.tar.gz"
+sha256sum = "e50f24506011841e2ac83d9733a0c7e058eb3a10a6e3e10baa9c7942ff5f4767"
+downloadLocation = "https://github.com/bazelbuild/rules_cc/releases/download/0.2.2/rules_cc-0.2.2.tar.gz"
+license = "Apache-2.0"
+version = "0.2.2"
+
+[[packages]]
+# https://github.com/bazel-contrib/bazel_features/releases/download/v1.30.0/bazel_features-v1.30.0.tar.gz
+name = "bazel_features-v1.30.0.tar.gz"
+sha256sum = "a660027f5a87f13224ab54b8dc6e191693c554f2692fcca46e8e29ee7dabc43b"
+downloadLocation = "https://github.com/bazel-contrib/bazel_features/releases/download/v1.30.0/bazel_features-v1.30.0.tar.gz"
+license = "Apache-2.0"
+version = "1.30.0"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_apple/releases/download/4.1.2/rules_apple.4.1.2.tar.gz
+name = "rules_apple.4.1.2.tar.gz"
+sha256sum = "de1c8bb872da6b03d2abff659178d3abfda5cc8d8a6b646fdab96ab2d00c9fa7"
+downloadLocation = "https://github.com/bazelbuild/rules_apple/releases/download/4.1.2/rules_apple.4.1.2.tar.gz"
+license = "Apache-2.0"
+version = "4.1.2"
+
+[[packages]]
+# https://github.com/bazelbuild/apple_support/releases/download/1.23.1/apple_support.1.23.1.tar.gz
+name = "apple_support.1.23.1.tar.gz"
+sha256sum = "ee20cc5c0bab47065473c8033d462374dd38d172406ecc8de5c8f08487943f2f"
+downloadLocation = "https://github.com/bazelbuild/apple_support/releases/download/1.23.1/apple_support.1.23.1.tar.gz"
+license = "Apache-2.0"
+version = "1.23.1"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_swift/releases/download/3.1.2/rules_swift.3.1.2.tar.gz
+name = "rules_swift.3.1.2.tar.gz"
+sha256sum = "5eff717c18bb513285b499add68f2331509cd4e411ff085e96a86b3342c1e5aa"
+downloadLocation = "https://github.com/bazelbuild/rules_swift/releases/download/3.1.2/rules_swift.3.1.2.tar.gz"
+license = "Apache-2.0"
+version = "3.1.2"
+
+[[packages]]
+# https://github.com/bazelbuild/platforms/releases/download/1.0.0/platforms-1.0.0.tar.gz
+name = "platforms-1.0.0.tar.gz"
+sha256sum = "3384eb1c30762704fbe38e440204e114154086c8fc8a8c2e3e28441028c019a8"
+downloadLocation = "https://github.com/bazelbuild/platforms/releases/download/1.0.0/platforms-1.0.0.tar.gz"
+license = "Apache-2.0"
+version = "1.0.0"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_pkg/releases/download/1.1.0/rules_pkg-1.1.0.tar.gz
+name = "rules_pkg-1.1.0.tar.gz"
+sha256sum = "b7215c636f22c1849f1c3142c72f4b954bb12bb8dcf3cbe229ae6e69cc6479db"
+downloadLocation = "https://github.com/bazelbuild/rules_pkg/releases/download/1.1.0/rules_pkg-1.1.0.tar.gz"
+license = "1.1.0"
+version = "Apache-2.0"
+
+[[packages]]
+# https://github.com/abseil/abseil-cpp/releases/download/20250814.0/abseil-cpp-20250814.0.tar.gz
+name = "abseil-cpp-20250814.0.tar.gz"
+sha256sum = "9b2b72d4e8367c0b843fa2bcfa2b08debbe3cee34f7aaa27de55a6cbb3e843db"
+downloadLocation = "https://github.com/abseil/abseil-cpp/releases/download/20250814.0/abseil-cpp-20250814.0.tar.gz"
+license = "Apache-2.0"
+version = "20250814.0"
+
+[[packages]]
+name = "hiroyuki-komatsu/japanpost_zipcode/zip_code_jigyosyo"
+sha256sum = "8b0c5e9f720dba6d600a2683a260b8f04d14f463d45d10893e7ba08424405a1e"
+downloadLocation = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33524763837473258e7ba2f14b17fc3a70519831/jigyosyo.zip"
+license = "SUSE-Public-Domain"
+version = "2025-08-30"
+
+[[packages]]
+name = "hiroyuki-komatsu/japanpost_zipcode/zip_code_kenall"
+downloadLocation = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33524763837473258e7ba2f14b17fc3a70519831/ken_all.zip"
+sha256sum = "47a3e63e1379f707af9c49df5c4fa0534332173c73c61f93d14555673bed7599"
+license = "SUSE-Public-Domain"
+version = "2025-08-30"
