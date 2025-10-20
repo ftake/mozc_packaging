@@ -10,6 +10,8 @@ verbuild=`sed -n -e "s/BUILD_OSS = \(.*\)/\1/p" src/data/version/mozc_version_te
 # REVISION is always 102 for Linux
 version=$vermajor.$verminor.$verbuild.102
 
+mkdir -p ../out
+
 git archive --prefix=mozc-$version/ HEAD | xz > ../out/mozc-$version.tar.xz
 
 popd
