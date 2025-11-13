@@ -58,7 +58,7 @@ def main():
                 hex_string = decoded_hash.hex()
                 add_to_reverse_table(hex_string, {"url": url, "source.json": file_path, "algorithm": algorithm})
 
-    os.mkdir("../cache")
+    os.makedirs("../cache", exist_ok=True)
     with open("../cache/reverse_table.json", "w") as f:
         json.dump(reverse_table, f, indent=4, sort_keys=True)
 
