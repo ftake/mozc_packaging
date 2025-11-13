@@ -15,12 +15,9 @@ pushd src
 bazel8 build package \
     -c opt --config oss_linux \
     --explain=build.txt \
-    --repository_cache=../../dependencies
-#   --repository_disable_download
-#   --registry=file:$(realpath ../bazel-central-registry) \
-#   --ignore_dev_dependency
+    --repository_cache=../../dependencies \
+    --registry=file:$(realpath ../../bazel-central-registry)
 
-cp MODULE.bazel.lock ../../out/
 
 popd
 popd

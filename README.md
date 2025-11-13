@@ -34,6 +34,7 @@ git checkout origin/main
 
 ```
 ./make_reverse_table.py
+./make_sbom_of_dependencies.py
 ```
 
 If you get a message like below, you need to check license, version and downloadLocation of unknown packages and fill the missing fields packages.toml:
@@ -61,6 +62,8 @@ version = ""
 ### (5) Create archive files for packaging
 
 ```
+./make_bcr.py
+./make_dependencies.sh
 ./make_archive.sh
 ./make_fcitx-mozc.sh
 ```
