@@ -8,6 +8,12 @@ popd
 
 pushd fcitx-mozc
 
+# check if fcitx-mozc is synced with mozc by comparing src/data/version/mozc_version_template.bzl
+if ! diff -q ../mozc/src/data/version/mozc_version_template.bzl src/data/version/mozc_version_template.bzl > /dev/null; then
+    echo "fcitx-mozc is not synced with mozc"
+    exit 1
+fi
+
 vermajor=`sed -n -e "s/MAJOR = \(.*\)/\1/p" src/data/version/mozc_version_template.bzl`
 verminor=`sed -n -e "s/MINOR = \(.*\)/\1/p" src/data/version/mozc_version_template.bzl`
 verbuild=`sed -n -e "s/BUILD_OSS = \(.*\)/\1/p" src/data/version/mozc_version_template.bzl`
