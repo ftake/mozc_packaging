@@ -300,3 +300,19 @@ downloadLocation = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33
 sha256sum = "47a3e63e1379f707af9c49df5c4fa0534332173c73c61f93d14555673bed7599"
 license = "SUSE-Public-Domain"
 version = "2025-08-30"
+
+[[packages]]
+# https://github.com/bazelbuild/rules_java/releases/download/8.14.0/rules_java-8.14.0.tar.gz
+name = "rules_java-8.14.0.tar.gz"
+sha256sum = "bbe7d94360cc9ed4607ec5fd94995fd1ec41e84257020b6f09e64055281ecb12"
+downloadLocation = "https://github.com/bazelbuild/rules_java/releases/download/8.14.0/rules_java-8.14.0.tar.gz"
+license = "Apache-2.0"
+version = "8.14.0"
+
+[[packages]]
+# https://github.com/bazelbuild/platforms/releases/download/0.0.11/platforms-0.0.11.tar.gz
+name = "platforms-0.0.11.tar.gz"
+sha256sum = "29742e87275809b5e598dc2f04d86960cc7a55b3067d97221c9abbc9926bff0f"
+downloadLocation = "https://github.com/bazelbuild/platforms/releases/download/0.0.11/platforms-0.0.11.tar.gz"
+license = "Apache-2.0"
+version = "0.0.11"
