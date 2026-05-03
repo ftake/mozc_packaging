@@ -50,7 +50,11 @@ def main():
                 if url is None:
                     continue
                     
-                integrity = source["integrity"]
+                integrity = source.get("integrity")
+
+                if integrity is None or len(integrity) == 0:
+                    # some source.json have an empty integrity field for its source archive file
+                    continue
 
                 algorithm = integrity.split("-")[0]
                 base64_hash = integrity.split("-")[1]
