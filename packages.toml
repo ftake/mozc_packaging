@@ -276,8 +276,8 @@ version = "1.0.0"
 name = "rules_pkg-1.1.0.tar.gz"
 sha256sum = "b7215c636f22c1849f1c3142c72f4b954bb12bb8dcf3cbe229ae6e69cc6479db"
 downloadLocation = "https://github.com/bazelbuild/rules_pkg/releases/download/1.1.0/rules_pkg-1.1.0.tar.gz"
-license = "1.1.0"
-version = "Apache-2.0"
+license = "Apache-2.0"
+version = "1.1.0"
 
 [[packages]]
 # https://github.com/abseil/abseil-cpp/releases/download/20250814.0/abseil-cpp-20250814.0.tar.gz
