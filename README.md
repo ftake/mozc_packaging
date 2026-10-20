@@ -15,7 +15,8 @@ git submodule update --recursive
 ```
 cd mozc
 git fetch
-git checkout xxxxxx
+git restore .
+git checkout 3.nn.nnnn
 cd ../fcitx-mozc
 git fetch
 git checkout yyyyyy
@@ -27,6 +28,7 @@ git checkout origin/main
 ### (3) Test build
 
 ```
+./clean.sh
 ./build.sh
 ```
 
